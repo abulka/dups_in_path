@@ -3,7 +3,7 @@ import 'dart:io' show Platform;
 /// Find duplicate PATH entries
 void main() {
   // test1();
-  // test2();
+  test2a();
 
   Map<String, String> envVars = Platform.environment;
   report(envVars['PATH']);
@@ -19,9 +19,18 @@ test1() {
 /// I got the string from $PATH in bash
 /// Looks like running the script from terminal is different to running this script from within vscode
 /// and that this is the true situation - lots of duplicates!
+/// Looks like vscode terminal is doing it!!!
+/// Confirmed - see https://code.visualstudio.com/docs/editor/integrated-terminal#_why-are-there-duplicate-paths-in-the-terminals-path-environment-variable-andor-why-are-they-reversed
 test2() {
   var s =
       "/usr/local/mysql-5.7.11-osx10.9-x86_64/bin:/Users/andy/.gem/ruby/2.7.0/bin:/usr/local/opt/ruby/bin:/usr/local/opt/openssl@1.1/bin:/Users/andy/.poetry/bin:/Users/andy/.pyenv/shims:./bin:~/scripts:/Users/Andy/.nvm/versions/node/v12.6.0/bin:/usr/local/mysql-5.7.11-osx10.9-x86_64/bin:/Users/andy/.gem/ruby/2.7.0/bin:/usr/local/opt/ruby/bin:/usr/local/opt/openssl@1.1/bin:/Users/andy/.poetry/bin:/Users/andy/.pyenv/shims:./bin:~/scripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/mysql-5.7.11-osx10.9-x86_64/bin:/Users/andy/.gem/ruby/2.7.0/bin:/usr/local/opt/ruby/bin:/usr/local/opt/openssl@1.1/bin:/Users/andy/.poetry/bin:/Users/andy/.pyenv/shims:./bin:~/scripts:/Users/andy/.local/bin:/Users/andy/Devel/flutter/bin:/Users/Andy/Devel/flutter/bin/cache/dart-sdk/bin:/Users/andy/Devel/flutter/.pub-cache/bin:/Users/andy/.local/bin:/Users/andy/.local/bin:/Users/andy/Devel/flutter/bin:/Users/Andy/Devel/flutter/bin/cache/dart-sdk/bin:/Users/andy/Devel/flutter/.pub-cache/bin:/Users/andy/.local/bin:/Users/andy/.local/bin:/Users/andy/Devel/flutter/bin:/Users/Andy/Devel/flutter/bin/cache/dart-sdk/bin:/Users/andy/Devel/flutter/.pub-cache/bin";
+  report(s);
+}
+
+// path as reported in bash (outside of vscode terminal) - AHA has no duplicates!
+test2a() {
+  var s =
+      "/usr/local/mysql-5.7.11-osx10.9-x86_64/bin:/Users/andy/.gem/ruby/2.7.0/bin:/usr/local/opt/ruby/bin:/usr/local/opt/openssl@1.1/bin:/Users/andy/.poetry/bin:/Users/andy/.pyenv/shims:./bin:~/scripts:/Users/Andy/.nvm/versions/node/v12.6.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/andy/.local/bin:/Users/andy/Devel/flutter/bin:/Users/Andy/Devel/flutter/bin/cache/dart-sdk/bin:/Users/andy/Devel/flutter/.pub-cache/bin";
   report(s);
 }
 
